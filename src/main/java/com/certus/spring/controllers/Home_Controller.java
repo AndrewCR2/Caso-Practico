@@ -1,4 +1,4 @@
-package controller;
+package com.certus.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,10 +15,6 @@ public class Home_Controller {
 
     @Value("${title.generic}")
     private String titlePage;
-
-    @Autowired
-    @Qualifier("")
-  //  private IProductoService InterfaceProducto;
 
     @GetMapping({ "/home", "inicio", "/", "Home", "Inicio" })
     public String HolaMundo(Model model) {

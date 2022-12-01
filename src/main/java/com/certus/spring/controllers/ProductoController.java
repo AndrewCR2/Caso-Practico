@@ -19,8 +19,9 @@ import com.certus.spring.service.IProductoService;
 import jakarta.validation.Valid;
 
 
+
 @Controller
-@RequestMapping("/producto")
+@RequestMapping("/productos")
 @SessionAttributes("producto")
 public class ProductoController {
     
@@ -31,14 +32,14 @@ public class ProductoController {
     @GetMapping("/listar")
 	public String ListarProducto(Model model) {
 
-		model.addAttribute("TituloPagina", "Hola mundo");
+		model.addAttribute("TituloPagina", "Listar productos");
 		model.addAttribute("titulo", "Productos");
 		Response<Producto> rspta = InterfaceProducto.listarProducto();
 
 		if (rspta.getEstado()) {
 			model.addAttribute("Mensaje", rspta.getMensaje());
 			model.addAttribute("listita", rspta.getListData());
-			return "productos";
+			return "listarProductos";
 		} else {
 			model.addAttribute("mensaje", rspta.getMensaje());
 			model.addAttribute("mensajeError", rspta.getMensajeError());
@@ -50,34 +51,36 @@ public class ProductoController {
 	public String Formulario(Model model) {
 		Producto producto = new Producto();
 
-		model.addAttribute("TituloPagina", "Hola mundo");
+		model.addAttribute("TituloPagina", "Crear producto");
 		model.addAttribute("titulo", " - Crear Producto");
 		model.addAttribute("producto", producto);
+		model.addAttribute("titulobtn", "Enviar");
 
-		return "form-producto";
+		return "formProductos";
 	}
 
     @GetMapping("/editar/{codProducto}")
-	public String EditarProducto(@PathVariable int idProducto, Model model) {
+	public String EditarProducto(@PathVariable int codProducto, Model model) {
 
-		model.addAttribute("TituloPagina", "Hola mundo");
+		model.addAttribute("TituloPagina", "Editar producto");
 
-		Response<Producto> rspta = InterfaceProducto.editarProducto(idProducto);
+		Response<Producto> rspta = InterfaceProducto.editarProducto(codProducto);
 
 		model.addAttribute("titulo", "Editando el producto " + rspta.getData().getNombre());
 
 		model.addAttribute("producto", rspta.getData());
+		model.addAttribute("titulobtn", "Guardar");
 
-		return "form-producto";
+		return "formProductos";
 	}
 
-    @GetMapping("/elimnar/{codProducto}")
-	public String ElimnarProducto(@PathVariable int idProducto, Model model) {
+    @GetMapping("/eliminar/{codProducto}")
+	public String ElimnarProducto(@PathVariable int codProducto, Model model) {
 
-		Response<Producto> rspta = InterfaceProducto.eliminarProducto(idProducto);
+		Response<Producto> rspta = InterfaceProducto.eliminarProducto(codProducto);
 
 		if (rspta.getEstado()) {
-			return "redirect:/Productos";
+			return "redirect:/productos/listar";
 		} else {
 			model.addAttribute("mensaje", rspta.getMensaje());
 			model.addAttribute("mensajeError", rspta.getMensajeError());
@@ -86,11 +89,11 @@ public class ProductoController {
 		}
 	}
 
-    @PostMapping("/form_pro")
+    @PostMapping("/form")
 	public String creaProducto(@Valid Producto Mermelada, BindingResult result, Model model, SessionStatus sStatus) {
 
 		if (result.hasErrors()) {
-			return "form-producto";
+			return "formProductos";
 		}
 
 		Response<Producto> rspta = InterfaceProducto.crearProducto(Mermelada);
@@ -98,7 +101,7 @@ public class ProductoController {
 		if (rspta.getEstado()) {
 
 			sStatus.setComplete();
-			return "redirect:/Productos";
+			return "redirect:/productos/listar";
 
 		} else {
 			model.addAttribute("mensaje", rspta.getMensaje());
