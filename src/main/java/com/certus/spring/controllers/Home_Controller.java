@@ -14,9 +14,6 @@ public class Home_Controller {
     @Value("${title.generic}")
     private String titlePage;
 
- 
-
-
     @GetMapping({ "/home", "inicio", "/", "Home", "Inicio" })
     public String HolaMundo(Model model) {
         model.addAttribute("TituloPagina", titlePage);

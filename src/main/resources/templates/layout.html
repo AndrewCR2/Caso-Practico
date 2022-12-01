@@ -9,7 +9,7 @@
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" th:href="@{/app/home}"><b>CASO PRÁCTICO</b></a>
+			<a class="navbar-brand" th:href="@{/}"><b>CASO PRÁCTICO</b></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -30,9 +30,9 @@
 				<li class="nav-item"><a class="nav-link"
 					th:href="@{/app/crear}">Crear Usuarios</a></li>
 				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Lista Productos</a></li>
+					th:href="@{/productos/listar}">Lista Productos</a></li>
 				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Crear Productos</a></li>
+					th:href="@{/productos/crear}">Crear Productos</a></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search"
