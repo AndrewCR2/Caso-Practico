@@ -18,18 +18,16 @@ import com.certus.spring.service.IProductoService;
 
 import jakarta.validation.Valid;
 
-
-
 @Controller
 @RequestMapping("/productos")
 @SessionAttributes("producto")
 public class ProductoController {
-    
-    @Autowired
+
+	@Autowired
 	@Qualifier("servicioProducto")
 	private IProductoService InterfaceProducto;
 
-    @GetMapping("/listar")
+	@GetMapping("/listar")
 	public String ListarProducto(Model model) {
 
 		model.addAttribute("TituloPagina", "Listar productos");
@@ -47,7 +45,7 @@ public class ProductoController {
 		}
 	}
 
-    @GetMapping("/crear")
+	@GetMapping("/crear")
 	public String Formulario(Model model) {
 		Producto producto = new Producto();
 
@@ -59,7 +57,7 @@ public class ProductoController {
 		return "formProductos";
 	}
 
-    @GetMapping("/editar/{codProducto}")
+	@GetMapping("/editar/{codProducto}")
 	public String EditarProducto(@PathVariable int codProducto, Model model) {
 
 		model.addAttribute("TituloPagina", "Editar producto");
@@ -74,7 +72,7 @@ public class ProductoController {
 		return "formProductos";
 	}
 
-    @GetMapping("/eliminar/{codProducto}")
+	@GetMapping("/eliminar/{codProducto}")
 	public String ElimnarProducto(@PathVariable int codProducto, Model model) {
 
 		Response<Producto> rspta = InterfaceProducto.eliminarProducto(codProducto);
@@ -89,10 +87,14 @@ public class ProductoController {
 		}
 	}
 
-    @PostMapping("/form")
+	@PostMapping("/form")
 	public String creaProducto(@Valid Producto Mermelada, BindingResult result, Model model, SessionStatus sStatus) {
 
 		if (result.hasErrors()) {
+			model.addAttribute("TituloPagina", "Crear producto");
+			model.addAttribute("titulo", " - Crear Producto");
+			model.addAttribute("titulobtn", "Enviar");
+
 			return "formProductos";
 		}
 
