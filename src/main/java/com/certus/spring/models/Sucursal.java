@@ -18,8 +18,6 @@ public class Sucursal {
 	@NotEmpty(message = "completar el nombre del Sucursal")
 	private String nombre;
 	
-	private String uriImage;
-	
 	public int getIdSucursal() {
 		return idSucursal;
 	}
@@ -28,17 +26,6 @@ public class Sucursal {
 		this.idSucursal = idSucursal;
 	}
 	
-
-
-	
-
-	public String getUriImage() {
-		return uriImage;
-	}
-
-	public void setUriImage(String uriImage) {
-		this.uriImage = uriImage;
-	}
 
 	public String getNombre() {
 		return nombre;

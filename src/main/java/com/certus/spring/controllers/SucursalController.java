@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.certus.spring.models.ResponseSuc;
 import com.certus.spring.models.Sucursal;
@@ -90,7 +88,6 @@ public class SucursalController {
 	@PostMapping("/form")
 	public String crearSucursal(@Valid Sucursal Sucursal,
 								 BindingResult result, 
-								 @RequestParam("ImagenDelFormulario")MultipartFile fileRecibido,
 								 Model model,
 								 SessionStatus sStatus) {
 		
@@ -101,7 +98,7 @@ public class SucursalController {
 			return "formSucursal";
 		}
 		
-		ResponseSuc<Sucursal> rspta= Interfacesucursal.crearSucursal(Sucursal,fileRecibido);
+		ResponseSuc<Sucursal> rspta= Interfacesucursal.crearSucursal(Sucursal);
 		
 		if(rspta.getEstado()) {			
 			sStatus.setComplete();  
