@@ -4,66 +4,107 @@
 <meta charset="utf-8">
 <title th:text="${TituloPagina}"></title>
 <link rel="stylesheet" th:href="@{/bootstrap/bootstrap.min.css}">
+<!-- <style> 
+ 	.bg{ 
+ 		background-image: url(img/naruto.gif); 
+ 		background-position: center center; 
+ 	} 
+</style> -->
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" th:href="@{/app/home}"><b>CASO PRÁCTICO</b></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+	<header th:replace="/layout :: header"></header>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					th:href="@{/app/home}">Inicio<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/listar}">Lista Sucursal</a></li>
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Crear Sucursal</a></li>
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Lista Usuarios</a></li>
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Crear Usuarios</a></li>
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Lista Productos</a></li>
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/app/crear}">Crear Productos</a></li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
-		</div>
-	</nav>
-
-	<div class="container mt-2">
+	<div class="container mt-4">
 		<div class="jumbotron">
-			<center><h1 class="display-4" th:text="${titulo}"></h1></center>
-			<p class="lead" th:text="${Estado}"></p>
+
+			<p th:text="${tituloForm}"></p>
 			<hr class="my-4">
 
 			<div>
-				<form th:action="@{/app/form}" th:object="${personaje}" method="post" enctype="multipart/form-data">
-				
+				<form th:action="@{/usuario/form}" th:object="${usuario}"
+					method="post">
 					<div class="form-group">
-						<label for="idNombres">Usuarios</label> <input type="text"
-							name="nombres" class="form-control" id="idNombres"
-							th:field="*{nombres}">
-						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></div>
+						<label for="idNombre">Nombre</label> <input type="text"
+							name="nombre" class="form-control" id="idNombre"
+							th:field="*{nombre}">
+						<!-- Se USA EL FIELD Y SOLO EL ASTERISCO PORQIUE YA SE MAPEO PERSONAJE -->
+						<div class="alert alert-danger" role="alert"
+							th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 					</div>
-					<button type="submit" class="btn btn-success" th:text="${titulobtn}"></button>
+					<div class="form-group">
+						<label for="idApellidos">Apellidos</label> <input type="text"
+							name="apellidos" class="form-control" id="idApellidos"
+							th:field="*{apellidos}">
+						<div class="alert alert-danger" role="alert"
+							th:if="${#fields.hasErrors('apellidos')}"
+							th:errors="*{apellidos}"></div>
+					</div>
+					<div class="form-group">
+						<label for="idPassword">Password</label> <input type="password"
+							name="password" class="form-control" id="idPassword"
+							th:field="*{password}">
+
+					</div>
+					<div class="form-group">
+						<label for="idSucursal">Sucursal</label> <input type="text"
+							name="sucursal" class="form-control" id="idSucursal"
+							th:field="*{sucursal}">
+						<div class="alert alert-danger" role="alert"
+							th:if="${#fields.hasErrors('sucursal')}" th:errors="*{sucursal}"></div>
+					</div>
+
+
+					<button type="submit" class="btn btn-success" value="Crear Usuario">Registrarse</button>
 				</form>
 			</div>
+			<hr>
 
 		</div>
+
 	</div>
+	<!-- <div>
+		<div class="row">
+			<div class="col bg">
+			
+			</div>
+			
+			<div class="col">
+				<h2 class="fw-bold text-center py-5" th:text="${tituloForm}"></h2>
+				
+				LOGIN
+				<form th:action="@{/usuario/form}" th:object="${usuario}" method="post">
+					<div class="mb-4">
+						<label for="idNombre" class="form-label">Nombre</label> 
+						<input type="text" name="nombre" class="form-control" id="idNombre" th:field="*{nombre}">
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nombre')}" th:errors="*{apellidos}"></div>
+					</div>
+					<div class="mb-4">
+						<label for="idApellidos">Apellidos</label> 
+						<input type="text" name="apellidos" class="form-control" id="idApellidos" th:field="*{apellidos}">
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></div>
+					</div>
+					<div class="mb-4">
+						<label for="idPassword">Password</label> 
+						<input type="password" name="password" class="form-control" id="idPassword" th:field="*{password}">
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+					</div>
+					<div class="mb-4">
+						<label for="idSucursal">Sucursal</label> <input type="text" name="sucursal" class="form-control" id="idSucursal" th:field="*{sucursal}">
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('sucursal')}" th:errors="*{sucursal}"></div>
+					</div>
+					<div class="mb-4 form-check" >
+						<input type="checkbox" name="connected" class="form" >
+						<label for="connected" class="form-check-label form-">Terminos y ondiciones</label>
+						
+					</div>
+					<div class="d-grid">
+						<button type="submit" class="btn btn-success" value="Crear Usuario">Registrarse</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div> -->
 
 
 	<script src="/bootstrap/jquery.slim.min.js"></script>

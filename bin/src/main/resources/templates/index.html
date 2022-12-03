@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Caso Practico</title>
+</head>
+
+<body>
+    <header class="hero">
+        <nav class="nav container">
+            <div class="nav_logo">
+                <h2 class="nav_title">Trabajo Grupal</h2>
+            </div>
+            <ul class="nav_link nav_link-menu">
+                <li class="nav_items">
+                    <a th:href="@{/productos/listar}" class="nav_links">Producto</a>
+                </li>
+                <li class="nav_items">
+                    <a th:href="@{/productos/listar}" class="nav_links">Usuario</a>
+                </li>
+                <li class="nav_items">
+                    <a th:href="@{/sucursal/listar}" class="nav_links">Sucursal</a>
+                </li>
+                <img src="./img/close.svg" alt="" class="nav_close">
+            </ul>
+
+            <div class="nav_menu">
+                <img src="./img/menu.svg" alt="" class="nav_img">
+
+            </div>
+        </nav>
+
+        <section class=" hero_container container">
+            <h1 class="hero_title">Caso Práctico - Certus</h1>
+            <p class="hero_paragraph">Se requiere la creación de un Mantenimiento (CURD) con Thymeleaf y Bootstrap que 
+                te permita obtener la información y manipularla de los usuarios, las sucursales y los
+                productos registrados en la base de datos. Se puede utilizar la arquitectura del APIREST
+                desarrollada en la primera parte.</p>
+      
+        </section>
+    </header>
+
+    <main>
+        <section class="container about">
+            <h2 class="subtitle">Base de Datos</h2>
+            <p class="about_paragraph"></p>
+
+            <div class="about_main">
+                <article class="about_icons">
+                    <img src="./img/shapes.svg" class="about_icon">
+                    <h3 class="about__title">Sucursal</h3>
+                    <p class="about__paragrah">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae tempore
+                        porro eius facilis?</p>
+                </article>
+                <article class="about_icons">
+                    <img src="./img/paint.svg" class="about_icon">
+                    <h3 class="about_title">Usuario</h3>
+                    <p class="about_paragrah">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae tempore
+                        porro eius facilis?</p>
+                </article>
+                <article class="about_icons">
+                    <img src="./img/code.svg" class="about_icon">
+                    <h3 class="about__title">Producto</h3>
+                    <p class="about__paragrah">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae tempore
+                        porro eius facilis?</p>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+
+        <section class="footer_container container">
+            <nav class="nav nav--footer">
+                <h2 class="footer_title">Caso Practico</h2>
+
+                <ul class="nav_link nav_link--footer">
+                    <li class="nav_items">
+                        <a href="#" class="nav_links">Producto</a>
+                    </li>
+                    <li class="nav_items">
+                        <a href="#" class="nav_links">Usuario</a>
+                    </li>
+                    <li class="nav_items">
+                        <a href="#" class="nav_links">Sucursal</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form class="footer_form" >
+                <h2 class="footer_newsletter">Registro</h2>
+                <div class="footer_inputs">
+                    <input type="email" placeholder="Email:" class="footer_input" >
+                    <input type="submit" value="Registrate" class="footer_submit">
+                </div>
+            </form>
+        </section>
+
+        <section class="footer_copy container">
+
+
+            <h3 class="footer_copyright">Derechos reservados &copy;</h3>
+        </section>
+        
+    </footer>
+    <script src="./js/slider.js"></script>
+    <script src="./js/question.js"></script>
+    <script src="./js/menu.js"></script>
+</body>
+</html>
