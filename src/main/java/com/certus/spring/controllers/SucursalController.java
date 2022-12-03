@@ -1,11 +1,7 @@
 package com.certus.spring.controllers;
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,34 +27,24 @@ import jakarta.validation.Valid;
 public class SucursalController {
 	
 	@Autowired
-	@Qualifier("sucursal1")
+	@Qualifier("servicioSucursal")
 	private ISucursalService Interfacesucursal;
-	
-	// @GetMapping({"/home","/inicio","/","/Home","/Inicio"})
-	// public String Home(Model model) {
-		
-	// 	model.addAttribute("TituloPagina", tittlePage);
-	// 	model.addAttribute("titulo", "Seccion j98 - Pagina de Inicio");		
-	// 	model.addAttribute("Mensaje",mensaje);
-	// 	return "Home";
-	// }
 	
 	@GetMapping("/listar")
 	public String ListarSucursal(Model model) {
 		
-		model.addAttribute("TituloPagina", "========");
-		model.addAttribute("titulo", "========");	
+		model.addAttribute("TituloPagina", "Listar sucursales");
+		model.addAttribute("titulo", "Listar sucursales");	
 		ResponseSuc<Sucursal> rspta= Interfacesucursal.listarSucursal();
 
 		if (rspta.getEstado()) {
 			model.addAttribute("Mensaje",rspta.getMensaje());
 			model.addAttribute("listita", rspta.getListData());
-			
-			return "";
+			return "listarSucursal";
 		}else {
 			model.addAttribute("mensaje", rspta.getMensaje());
-			model.addAttribute("mensaje", rspta.getMensajeError());
-			return "";
+			model.addAttribute("mensajeError", rspta.getMensajeError());
+			return "errores";
 		}
 	}
 	
@@ -66,23 +52,25 @@ public class SucursalController {
 	public String Formulario(Model model) {
 		Sucursal sucursal = new Sucursal();
 		
-		model.addAttribute("TituloPagina", "========");
-		model.addAttribute("titulo","==============");
+		model.addAttribute("TituloPagina", "Crear Sucursales");
+		model.addAttribute("titulo","Crear Sucursales");
 		model.addAttribute("sucursal", sucursal);
-		return "";
+		model.addAttribute("titulobtn", "Enviar");
+		return "formSucursal";
 	}
 	
 	@GetMapping("/Editar/{idSucursal}")
 	public String EditarSucursal(@PathVariable int idSucursal, Model model) {
 		
-		model.addAttribute("TituloPagina", "========");
+		model.addAttribute("TituloPagina", "Editar sucursal");
 		
 		ResponseSuc<Sucursal> rspta= Interfacesucursal.editarSucursal(idSucursal);
 		model.addAttribute("titulo","editar sucursal "+rspta.getData().getNombre());
 		
 		model.addAttribute("sucursal", rspta.getData());
+		model.addAttribute("titulobtn", "Guardar");
 		
-		return "";
+		return "formSucursal";
 	}
 	
 	@GetMapping("/Eliminar/{idSucursal}")
@@ -91,11 +79,11 @@ public class SucursalController {
 		ResponseSuc<Sucursal> rspta= Interfacesucursal.eliminarSucursal(idSucursal);
 		
 		if(rspta.getEstado()) {
-			return "";
+			return "redirect:/sucursal/listar";
 		}else {			
 			model.addAttribute("mensaje", rspta.getMensaje());
-			model.addAttribute("mensaje", rspta.getMensajeError());
-			return "";
+			model.addAttribute("mensajeError", rspta.getMensajeError());
+			return "errores";
 		}
 	}
 	
@@ -107,18 +95,21 @@ public class SucursalController {
 								 SessionStatus sStatus) {
 		
 		if(result.hasErrors()) {
-			return "";
+			model.addAttribute("TituloPagina", "Crear sucursal");
+			model.addAttribute("titulo", " - Crear Sucursal");
+			model.addAttribute("titulobtn", "Enviar");
+			return "formSucursal";
 		}
 		
 		ResponseSuc<Sucursal> rspta= Interfacesucursal.crearSucursal(Sucursal,fileRecibido);
 		
 		if(rspta.getEstado()) {			
 			sStatus.setComplete();  
-			return "";
+			return "redirect:/sucursal/listar";
 		}else {			
 			model.addAttribute("mensaje", rspta.getMensaje());
-			model.addAttribute("mensaje", rspta.getMensajeError());
-			return "";
+			model.addAttribute("mensajeError", rspta.getMensajeError());
+			return "errores";
 		}
 		
 	}

@@ -15,7 +15,7 @@ import com.certus.spring.repository.SucursalDAO;
 import com.certus.spring.service.inteface.IFileGenericSuc;
 import com.certus.spring.service.inteface.ISucursalService;
 
-@Component("sucursal1")
+@Component("servicioSucursal")
 public class SucursalService implements ISucursalService {
 
 	@Autowired

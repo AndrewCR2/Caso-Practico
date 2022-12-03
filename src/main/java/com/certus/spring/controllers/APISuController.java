@@ -21,7 +21,7 @@ import com.certus.spring.service.inteface.ISucursalService;
 public class APISuController {
 	
 	@Autowired
-	@Qualifier("sucursal1")
+	@Qualifier("servicioSucursal")
 	private ISucursalService Interfacesucursal;
 	
 	@GetMapping("/listar")
